@@ -141,7 +141,7 @@ export default function RegisterPage() {
 
   // Registro social deshabilitado temporalmente
   const handleSocialRegister = async (provider: 'apple' | 'google') => {
-    toast.info('El registro con Google está temporalmente deshabilitado. Por favor, usa el registro manual.')
+    toast('El registro con Google está temporalmente deshabilitado. Por favor, usa el registro manual.')
   }
 
   const onSubmit = async (data: RegisterForm | PasswordForm) => {

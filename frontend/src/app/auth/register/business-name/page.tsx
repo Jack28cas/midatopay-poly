@@ -9,7 +9,7 @@ export default function BusinessNamePage() {
   const router = useRouter()
   
   useEffect(() => {
-    toast.info('Esta página está deshabilitada. Por favor, usa el registro manual.')
+    toast('Esta página está deshabilitada. Por favor, usa el registro manual.')
     router.push('/auth/register')
   }, [router])
   
