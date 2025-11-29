@@ -34,9 +34,17 @@ export default function QRScannerPage() {
         console.log('Starting camera...')
         setIsInitialized(true)
         
+        // Verificar si estamos en un contexto seguro (HTTPS o localhost)
+        const isSecureContext = window.isSecureContext || location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+        if (!isSecureContext) {
+          setError('Camera access requires HTTPS. Please access this page via HTTPS (https://midatopay.com/scan)')
+          console.error('❌ Not a secure context. Camera requires HTTPS.')
+          return
+        }
+        
         // Verificar si el navegador soporta getUserMedia
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          setError('Your browser does not support camera access')
+          setError('Your browser does not support camera access. Please use a modern browser like Chrome, Firefox, or Safari.')
           return
         }
 
@@ -87,11 +95,34 @@ export default function QRScannerPage() {
         console.error('Error accediendo a la cámara:', err)
         const error = err as any
         if (error.name === 'NotAllowedError') {
-          setError('Se requieren permisos de cámara para escanear QR codes')
+          setError('Se requieren permisos de cámara. Por favor, permite el acceso a la cámara en la configuración de tu navegador.')
         } else if (error.name === 'NotFoundError') {
-          setError('No se encontró una cámara disponible')
+          setError('No se encontró una cámara disponible. Por favor, conecta una cámara y recarga la página.')
+        } else if (error.name === 'NotReadableError') {
+          setError('La cámara está siendo usada por otra aplicación. Por favor, cierra otras aplicaciones que usen la cámara.')
+        } else if (error.name === 'OverconstrainedError') {
+          setError('La cámara no soporta las características requeridas. Intentando con configuración alternativa...')
+          // Intentar con configuración más básica
+          try {
+            const basicStream = await navigator.mediaDevices.getUserMedia({ video: true })
+            if (videoRef.current) {
+              videoRef.current.srcObject = basicStream
+              videoRef.current.onloadedmetadata = () => {
+                videoRef.current?.play().then(() => {
+                  setIsScanning(true)
+                  setTimeout(() => startQRDetection(), 1000)
+                })
+              }
+            }
+            setError(null)
+            setHasPermission(true)
+            setIsScannerReady(true)
+            return
+          } catch (retryErr) {
+            setError('No se pudo acceder a la cámara con ninguna configuración.')
+          }
         } else {
-          setError('Error al acceder a la cámara: ' + (err as Error).message)
+          setError(`Error al acceder a la cámara: ${error.name || error.message || 'Error desconocido'}. Protocolo actual: ${location.protocol}`)
         }
         setHasPermission(false)
       }
@@ -349,9 +380,10 @@ export default function QRScannerPage() {
                 <div className="relative">
                   {hasPermission === false ? (
                     <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                      <div className="text-center">
+                      <div className="text-center p-4">
                         <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                        <p className="text-gray-600 mb-4">Camera permissions required</p>
+                        <p className="text-gray-600 mb-2 font-medium">Camera permissions required</p>
+                        <p className="text-sm text-gray-500 mb-4">Please allow camera access in your browser settings</p>
                         <Button onClick={retryScanning} variant="outline">
                           Allow Camera
                         </Button>
@@ -359,10 +391,18 @@ export default function QRScannerPage() {
                     </div>
                   ) : error ? (
                     <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                      <div className="text-center">
+                      <div className="text-center p-4 max-w-md">
                         <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                        <p className="text-gray-600 mb-4">{error}</p>
-                        <Button onClick={retryScanning} variant="outline">
+                        <p className="text-gray-700 mb-2 font-medium">{error}</p>
+                        {error.includes('HTTPS') && (
+                          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3 mb-3">
+                            <p className="text-sm text-yellow-800">
+                              <strong>⚠️ HTTPS Required:</strong> Camera access requires a secure connection. 
+                              Please make sure you're accessing the site via <code className="bg-yellow-100 px-1 rounded">https://midatopay.com/scan</code>
+                            </p>
+                          </div>
+                        )}
+                        <Button onClick={retryScanning} variant="outline" className="mt-2">
                           Retry
                         </Button>
                       </div>
