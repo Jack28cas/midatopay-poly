@@ -1,0 +1,466 @@
+{
+  "header": {
+    "home": "首页",
+    "joinWaitlist": "加入候补名单",
+    "news": "新闻",
+    "login": "登录",
+    "signUp": "注册"
+  },
+  "homepage": {
+    "hero": {
+      "title": "您的业务，",
+      "titleImmune": "免受",
+      "subtitle": "保护您的销售价值，无需改变收款方式。",
+      "collect": "收款：",
+      "receive": "收到："
+    },
+    "infoBar": {
+      "exclusiveBenefits": "独家福利",
+      "instantConversion": "即时转换",
+      "merchantSupport": "商户支持"
+    },
+    "features": {
+      "title": "为什么选择 MidatoPay？",
+      "startBeating": {
+        "title": "开始战胜",
+        "description": "通过自动转换为加密货币来保护您的收入免受通货膨胀影响。"
+      },
+      "simpleIntegration": {
+        "title": "简单集成",
+        "description": "无需改变工作流程。只需生成二维码即可接收付款。"
+      },
+      "instantPayments": {
+        "title": "即时付款",
+        "description": "实时接收付款，区块链快速确认。"
+      }
+    },
+    "promoCards": {
+      "startBeating": {
+        "title1": "开始",
+        "title2": "战胜",
+        "title3": "通货膨胀",
+        "button": "开始"
+      },
+      "interoperableQR": {
+        "title1": "互操作二维码：",
+        "title2": "接受任何",
+        "title3": "钱包",
+        "button": "了解更多"
+      },
+      "merchants": {
+        "title1": "+50 商户",
+        "title2": "选择",
+        "title3": "MidatoPay",
+        "button": "加入我们"
+      }
+    },
+    "howItWorks": {
+      "title": "MidatoPay 如何运作",
+      "titleLine1": "如何运作",
+      "titleLine2": "MidatoPay",
+      "subtitle": "一个简单安全的过程，保护您的销售免受通货膨胀影响",
+      "subtitleLine1": "一个简单安全的过程，保护",
+      "subtitleLine2": "您的销售免受通货膨胀影响",
+      "description": {
+        "line1": "一个动态循环",
+        "line2": "迭代专注于",
+        "line3": "简洁性，",
+        "line4": "个性化",
+        "line5": "和用户信任。"
+      },
+      "step1": {
+        "title": "生成二维码",
+        "description": "商户创建二维码，包含阿根廷比索金额和所需的加密货币"
+      },
+      "step2": {
+        "title": "客户扫描",
+        "description": "客户用手机扫描二维码并查看付款详情"
+      },
+      "step3": {
+        "title": "以阿根廷比索付款",
+        "description": "客户使用首选方式以阿根廷比索付款"
+      },
+      "step4": {
+        "title": "自动转换",
+        "description": "MidatoPay 自动将比索转换为加密货币"
+      }
+    },
+    "cta": {
+      "title": "准备好保护您的销售了吗？",
+      "description": "加入已经保护收入免受通货膨胀影响的商户。",
+      "button": "开始"
+    },
+    "footer": {
+      "description": "通过加密货币支付保护您的销售免受通货膨胀影响。为您的企业提供自动转换和区块链安全。",
+      "product": "产品",
+      "support": "支持",
+      "howItWorks": "工作原理",
+      "pricing": "定价",
+      "security": "安全",
+      "api": "API",
+      "helpCenter": "帮助中心",
+      "contact": "联系",
+      "documentation": "文档",
+      "systemStatus": "系统状态",
+      "copyright": "© 2025 MidatoPay。保留所有权利。",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "cookies": "Cookie"
+    },
+    "problems": {
+      "title": "问题",
+      "subtitle": "我们探索商户的期望和潜在问题，以简化他们的体验。",
+      "problem1": {
+        "title": "因通货膨胀造成的价值损失",
+        "description": "商户看到他们的阿根廷比索销售额因通货膨胀而逐日贬值。他们不知道如何在不改变收款方式的情况下保护收入。"
+      },
+      "problem2": {
+        "title": "不必要的技术复杂性",
+        "description": "客户到达商店后无法理解如何使用加密货币付款。一切似乎都很复杂，他们需要钱包、技术知识，最终放弃购买。"
+      }
+    },
+    "faq": {
+      "title": "常见问题",
+      "mainTitle": "有问题吗？",
+      "subtitle": "关于 MidatoPay 您需要了解的一切",
+      "categories": {
+        "general": "一般",
+        "pagos": "支付"
+      },
+      "items": {
+        "general": [
+          {
+            "question": "MidatoPay 如何运作？",
+            "answer": "MidatoPay 允许商户生成客户可以扫描的二维码。客户使用他们首选的方式以阿根廷比索支付，MidatoPay 自动将这些比索转换为加密货币，保护销售额免受通货膨胀影响。"
+          },
+          {
+            "question": "MidatoPay 接受哪些加密货币？",
+            "answer": "MidatoPay 接受多种加密货币，包括 USDT、BTC 和 ETH。商户在生成二维码时可以选择他们希望接收付款的加密货币。"
+          },
+          {
+            "question": "使用 MidatoPay 需要技术知识吗？",
+            "answer": "不需要，MidatoPay 设计简单易用。您只需要生成一个二维码，您的客户就可以正常支付。转换为加密货币是自动且透明的。"
+          }
+        ],
+        "pagos": [
+          {
+            "question": "转换需要多长时间？",
+            "answer": "从阿根廷比索到加密货币的转换是即时的。一旦客户完成付款，商户会在几秒钟内收到确认。"
+          },
+          {
+            "question": "使用 MidatoPay 安全吗？",
+            "answer": "是的，MidatoPay 使用区块链技术确保交易安全。所有转换都以安全透明的方式进行，并在区块链上确认。"
+          },
+          {
+            "question": "使用 MidatoPay 有费用吗？",
+            "answer": "MidatoPay 提供透明的解决方案，具有竞争力的费用。费用基于交易量，并在每次操作前清楚地传达。"
+          }
+        ]
+      },
+      "askQuestion": {
+        "button": "提问",
+        "title": "提出您的问题",
+        "questionLabel": "您的问题",
+        "questionPlaceholder": "在这里写下您的问题...",
+        "contextLabel": "上下文（可选）",
+        "contextPlaceholder": "您为什么问这个问题？分享上下文将帮助我们更好地理解...",
+        "submit": "提交问题",
+        "cancel": "取消",
+        "success": "谢谢！您的问题已提交。我们会审查它，如果相关，会将其添加到常见问题中。",
+        "error": "请在提交前至少完成问题。"
+      }
+    },
+    "support": {
+      "title": "使用的技术：",
+      "starknet": {
+        "features": {
+          "cairo": "Cairo 智能合约",
+          "l2": "可扩展的 L2 网络",
+          "costs": "低成本",
+          "security": "以太坊安全性"
+        }
+      },
+      "cavos": {
+        "features": {
+          "wallets": "隐形钱包",
+          "integration": "Aegis SDK 集成",
+          "auth": "完美身份验证"
+        }
+      }
+    },
+    "ctaSection": {
+      "title": "加入我们的社区",
+      "waitlist": {
+        "title": "等候名单",
+        "description": "成为首批访问 MidatoPay 的用户之一。加入我们的等候名单，在发布时获得优先访问权限。",
+        "button": "立即加入"
+      },
+      "news": {
+        "title": "新闻",
+        "description": "了解我们的最新成就、活动和更新。了解我们如何彻底改变支付方式。",
+        "button": "查看新闻"
+      }
+    },
+    "stats": {
+      "waitlist": "商户等待中",
+      "billing": "美元账单等待中",
+      "transactions": "成功交易",
+      "merchants": "活跃商户"
+    },
+    "socialMedia": {
+      "title": "在社交媒体上关注我们"
+    }
+  },
+  "typewriter": {
+    "words": ["通货膨胀", "贬值", "危机"]
+  },
+  "waitlist": {
+    "title": "MidatoPay",
+    "subtitle": "商户保护自己免受",
+    "inflation": "通货膨胀",
+    "description": "第一个允许使用互操作二维码收款并直接接收加密货币付款的商户钱包。在促进现代安全交易的同时保护您的企业免受通货膨胀影响。",
+    "features": {
+      "protection": "抵御通货膨胀",
+      "instant": "即时交易",
+      "crypto": "加密货币支付",
+      "qr": "互操作二维码"
+    },
+    "ctaButton": "加入候补名单",
+    "waitlistTitle": "候补名单",
+    "question": "您的月收入是多少？",
+    "billingOptions": {
+      "lessThan1000": "少于 1,000 美元",
+      "1000to5000": "1,000 - 5,000 美元",
+      "5000to10000": "5,000 - 10,000 美元",
+      "10000to50000": "10,000 - 50,000 美元",
+      "50000to100000": "50,000 - 100,000 美元",
+      "moreThan100000": "超过 100,000 美元"
+    },
+    "votes": "票",
+    "priority": "获得优先和独家访问权限",
+    "modal": {
+      "title": "候补名单",
+      "question": "您的月收入是多少？",
+      "youSelected": "您选择了：",
+      "emailPlaceholder": "your@email.com",
+      "subscribe": "订阅",
+      "subscribing": "订阅中...",
+      "priorityText": "获得优先和独家访问权限"
+    },
+    "success": {
+      "title": "您已成功加入！",
+      "message": "当 MidatoPay 可用时，我们将通知您。",
+      "close": "关闭"
+    },
+    "errors": {
+      "joinError": "加入候补名单时出错",
+      "connectionError": "连接错误。请重试。"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "您好！",
+      "backToHome": "返回首页",
+      "email": "电子邮件",
+      "emailPlaceholder": "输入您的电子邮件",
+      "continue": "继续",
+      "password": "密码",
+      "passwordPlaceholder": "输入您的密码",
+      "forgotPassword": "忘记密码？",
+      "rememberMe": "记住我",
+      "signIn": "登录",
+      "signingIn": "登录中...",
+      "orContinueWith": "或继续使用",
+      "google": "Google",
+      "dontHaveAccount": "没有账户？",
+      "signUp": "注册",
+      "change": "更改",
+      "welcome": "欢迎使用 MidatoPay！",
+      "errors": {
+        "invalidEmail": "请输入有效的电子邮件",
+        "loggingIn": "登录时出错",
+        "passwordMin": "密码必须至少 6 个字符"
+      },
+      "socialLogin": "使用 {provider} 登录即将通过 Cavos Aegis 推出"
+    },
+    "register": {
+      "title": "创建账户",
+      "backToHome": "返回首页",
+      "fullName": "全名",
+      "fullNamePlaceholder": "您的全名",
+      "email": "电子邮件",
+      "emailPlaceholder": "your@email.com",
+      "password": "密码",
+      "passwordPlaceholder": "至少 6 个字符",
+      "confirmPassword": "确认密码",
+      "confirmPasswordPlaceholder": "重复您的密码",
+      "orSignUpWith": "或使用以下方式注册",
+      "continueWithGoogle": "使用 Google 继续",
+      "continueWithApple": "使用 Apple 继续",
+      "change": "更改",
+      "name": "姓名",
+      "acceptTerms": "我接受",
+      "termsAndConditions": "条款和条件",
+      "andThe": "和",
+      "privacyPolicy": "隐私政策",
+      "createAccount": "创建账户",
+      "creatingAccount": "创建账户中...",
+      "alreadyHaveAccount": "已有账户？",
+      "loginHere": "在此登录",
+      "accountCreated": "账户创建成功！",
+      "errors": {
+        "nameMin": "姓名必须至少 2 个字符",
+        "invalidEmail": "请输入有效的电子邮件",
+        "passwordMin": "密码必须至少 6 个字符",
+        "passwordsDontMatch": "密码不匹配",
+        "registering": "注册时出错"
+      },
+      "socialRegister": "使用 {provider} 注册即将通过 Cavos Aegis 推出"
+    }
+  },
+  "news": {
+    "title": "新闻",
+    "subtitle": "MidatoPay 的最新更新和新闻",
+    "readMore": "阅读更多",
+    "backToNews": "返回新闻",
+    "articles": {
+      "hackathon": {
+        "title": "MidatoPay 赢得黑客马拉松并进入 Starknet 创业之家的种子阶段",
+        "date": "2025年11月5日",
+        "excerpt": "我们很高兴地宣布，MidatoPay 在黑客马拉松中获得第三名，并已被选中参加在阿根廷布宜诺斯艾利斯举行的 Starknet 创业之家计划的种子阶段。",
+        "content": "我们很高兴分享一个好消息！MidatoPay 在 Starknet 黑客马拉松中从全球 1,400 多个项目中脱颖而出，获得第三名，并已被选中参加在阿根廷布宜诺斯艾利斯举行的 Starknet 创业之家计划的种子阶段。\n\n这一认可让我们充满自豪，并激励我们继续为 LATAM 商户构建法币和加密货币之间的互操作支付解决方案。\n\n黑客马拉松的胜利验证了我们通过区块链解决方案保护商户免受通货膨胀影响的愿景。\n\n我们非常感谢 **Cavos**、**Starknet Foundation** 和 **Crecimiento Argentina** 在整个过程中给予我们的支持、信任和能量。\n\n从 2025 年 11 月 12 日至 16 日，我们的团队将参加布宜诺斯艾利斯创业之家，这是一个为期 5 天的强化计划，旨在将项目从 MVP 扩展到成熟的初创公司。该计划将为我们提供：\n\n• 升级的技术架构\n• 针对我们产品的定制化市场进入计划\n• 首批客户获取策略\n• 清晰的 90 天增长路线图及后续支持\n• 与导师和 Starknet 构建者的新联系\n\n该计划包括免费住宿、餐食、指导和专业研讨会。我们致力于利用这一独特机会加速平台开发，将 MidatoPay 提升到新水平。\n\n请继续关注更多更新，我们将继续为商户构建支付的未来。",
+        "videoSection": {
+          "title": "官方黑客马拉松公告",
+          "description": "您可以观看 MidatoPay 被宣布为黑客马拉松第三名获奖者的确切时刻：",
+          "notSupported": "您的浏览器不支持视频播放。"
+        },
+        "socialMedia": {
+          "title": "我们社交媒体上的帖子"
+        }
+      },
+      "startupWorldCup": {
+        "title": "MidatoPay 被选中参加在布宜诺斯艾利斯举行的创业世界杯",
+        "date": "2025年11月12日",
+        "excerpt": "重大消息！MidatoPay 已被 Crecimiento Argentina 选中参加在布宜诺斯艾利斯 AlephHub 举行的创业世界杯预选赛。",
+        "content": "重大消息！🎉\n\nMidatoPay 已被 **Crecimiento Argentina** 选中参加在布宜诺斯艾利斯 AlephHub 举行的创业世界杯预选赛。\n\n这是我们实现为整个拉丁美洲 🌎 带来金融包容性和无缝加密法币支付的梦想的又一步。\n\n感谢我们的团队。"
+      },
+      "startupHouse": {
+        "title": "MidatoPay 将参加在布宜诺斯艾利斯举行的 Starknet 创业之家",
+        "date": "2025年11月12日",
+        "excerpt": "我们的团队正准备参加在布宜诺斯艾利斯举行的 Starknet 创业之家计划，这是一个为期 5 天的强化计划，旨在将项目从 MVP 扩展到成熟的初创公司。",
+        "content": "我们很高兴分享更多关于我们将在 2025 年 11 月 12 日至 16 日在阿根廷布宜诺斯艾利斯参加的 Starknet 创业之家计划的详细信息。\n\n创业之家是一个专为在 Starknet 上构建且已拥有运行中 MVP 的团队设计的计划。该计划在数天内提供经验丰富的构建者和导师的实践支持，以创建成功的、以用户为导向的业务。\n\n该计划旨在将您的项目从 MVP 扩展到成熟的初创公司，通过专家导师完善您的策略，并与投资者和风险投资公司建立网络机会。\n\n计划福利：\n\n• 升级的技术架构\n• 针对您产品的定制化市场进入计划\n• 首批客户获取策略\n• 清晰的 90 天增长路线图及后续支持\n• 与导师和 Starknet 构建者的新联系\n\n布宜诺斯艾利斯活动信息：\n\n• 地点：阿根廷布宜诺斯艾利斯\n• 日期：2025 年 11 月 12 日至 16 日\n• 重点：深入探讨您的 Starknet MVP 的技术改进和业务扩展\n• 包括：免费住宿、餐食、指导和研讨会\n\n我们很自豪能成为该计划的一部分，并期待与我们的社区分享我们的学习和进展。"
+      }
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "start": "开始",
+      "wallet": "钱包",
+      "movements": "交易记录",
+      "logout": "登出"
+    },
+    "header": {
+      "start": "开始"
+    },
+    "welcome": "欢迎,",
+    "totalBalance": "总余额:",
+    "cryptoBalance": "加密货币余额:",
+    "filter": "筛选",
+    "balance": "余额",
+    "exchangeRate": "汇率",
+    "argentinePesos": "阿根廷比索",
+    "walletInformation": "钱包信息",
+    "walletDescription": "您已连接的 Cavos Aegis 钱包详情",
+    "address": "地址",
+    "yourWalletAddress": "您的钱包地址",
+    "network": "网络",
+    "testnet": "测试网",
+    "controlCenter": "控制中心",
+    "manageBusiness": "从这里管理您的业务",
+    "createPayment": "创建支付",
+    "instantQR": "即时二维码",
+    "walletConnected": "钱包已连接",
+    "connectWallet": "连接钱包",
+    "disconnecting": "断开连接中...",
+    "connecting": "连接中...",
+    "clickToConnect": "点击连接",
+    "clickToDisconnect": "点击断开",
+    "movements": "交易记录",
+    "transactionHistory": "交易历史",
+    "loadingMovements": "加载交易记录中...",
+    "errorLoading": "加载错误",
+    "noMovements": "暂无交易记录",
+    "successfulTransfers": "成功的转账将显示在这里",
+    "loading": "加载中...",
+    "walletConnectedStatus": "钱包已连接",
+    "walletDisconnectedStatus": "钱包未连接",
+    "addressCopied": "地址已复制",
+    "generateQR": "生成二维码",
+    "withdraw": "提取",
+    "viewHistory": "查看历史",
+    "settings": "设置",
+    "withdrawComingSoon": "功能即将推出",
+    "settingsComingSoon": "功能即将推出",
+    "createPayment": {
+      "backToDashboard": "返回仪表板",
+      "title": "创建付款",
+      "paymentDetails": "付款详情",
+      "completeDetails": "填写详细信息以生成付款二维码",
+      "amountInARS": "阿根廷比索金额",
+      "conversionPercentage": "转换百分比",
+      "cryptoToReceive": "接收的加密货币",
+      "oracleDescription": "您将根据 Oracle 汇率自动接收 USDC",
+      "exchangeRate": "汇率",
+      "exchangeRateLabel": "汇率",
+      "loadingRate": "正在加载汇率...",
+      "remainingAmountARS": "剩余阿根廷比索金额:",
+      "remainingAmountDescription": "您将收到总额的 {percentage}% ({amount} 阿根廷比索)",
+      "generateQR": "生成付款二维码",
+      "generatingQR": "正在生成二维码...",
+      "qrModal": {
+        "title": "二维码已生成！",
+        "shareQR": "分享此二维码",
+        "youWillReceive": "您将收到：",
+        "rate": "汇率：",
+        "calculating": "计算中...",
+        "copyQR": "复制二维码",
+        "copied": "已复制！",
+        "download": "下载",
+        "refreshQR": "刷新二维码",
+        "refreshing": "刷新中...",
+        "generatingNewQR": "正在生成新二维码...",
+        "close": "关闭",
+        "sessionID": "会话ID：",
+        "generated": "生成时间：",
+        "paymentQRCode": "付款二维码",
+        "errors": {
+          "errorCopyingQR": "复制二维码时出错",
+          "errorDownloadingQR": "下载二维码时出错"
+        },
+        "success": {
+          "qrCopied": "二维码已复制到剪贴板",
+          "qrDownloaded": "二维码已下载"
+        }
+      },
+      "errors": {
+        "mustBeAuthenticated": "您必须经过身份验证才能创建付款",
+        "amountMustBeGreater": "金额必须大于 0",
+        "errorGeneratingQR": "生成二维码时出错",
+        "errorUpdatingQR": "更新二维码时出错"
+      },
+      "success": {
+        "qrGenerated": "二维码生成成功！",
+        "qrUpdated": "二维码已更新"
+      }
+    },
+    "toasts": {
+      "sessionClosed": "会话已关闭",
+      "walletConnected": "钱包连接成功",
+      "walletDisconnected": "钱包已断开",
+      "noWalletConfigured": "未配置钱包。请使用 WalletSetup 组件。",
+      "errorConnecting": "连接钱包时出错",
+      "errorDisconnecting": "断开钱包时出错"
+    }
+  }
+}
+

@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: midatopay-postgres-prod
+    environment:
+      POSTGRES_DB: midatopay
+      POSTGRES_USER: midatopay
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - midatopay-network-prod
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U midatopay"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: midatopay-backend-prod
+    env_file:
+      - ./backend/.env
+    environment:
+      # Ensure DATABASE_URL uses service name
+      DATABASE_URL: postgresql://${POSTGRES_USER:-midatopay}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-midatopay}
+    ports:
+      - "127.0.0.1:3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # En producción, NO montar volúmenes de código
+    # Solo montar volúmenes para datos persistentes
+    # volumes:
+    #   - ./backend:/app  # ❌ NO en producción
+    #   - /app/node_modules
+    networks:
+      - midatopay-network-prod
+    restart: unless-stopped
+    command: npm start
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Next.js
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-https://midatopay.com}
+        - NEXT_PUBLIC_WS_URL=${NEXT_PUBLIC_WS_URL:-wss://midatopay.com/ws}
+    container_name: midatopay-frontend-prod
+    env_file:
+      - ./frontend/.env.production
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    # En producción, NO montar volúmenes de código
+    # Solo se usa la imagen construida
+    # volumes:
+    #   - ./frontend:/app  # ❌ NO en producción
+    #   - /app/node_modules
+    #   - /app/.next
+    networks:
+      - midatopay-network-prod
+    restart: unless-stopped
+    command: npm start
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  postgres_data_prod:
+
+networks:
+  midatopay-network-prod:
+    driver: bridge
+

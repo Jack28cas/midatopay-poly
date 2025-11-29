@@ -1,0 +1,466 @@
+{
+  "header": {
+    "home": "Inicio",
+    "joinWaitlist": "Únete a la Lista",
+    "news": "Noticias",
+    "login": "Iniciar Sesión",
+    "signUp": "Registrarse"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Tu negocio,",
+      "titleImmune": "inmune a",
+      "subtitle": "Protege el valor de tus ventas sin cambiar cómo cobras.",
+      "collect": "Cobrar:",
+      "receive": "Recibir:"
+    },
+    "infoBar": {
+      "exclusiveBenefits": "Beneficios exclusivos",
+      "instantConversion": "Conversión instantánea",
+      "merchantSupport": "Soporte al comerciante"
+    },
+    "features": {
+      "title": "¿Por qué elegir MidatoPay?",
+      "startBeating": {
+        "title": "Comienza a vencer",
+        "description": "Protege tus ingresos de la inflación con conversión automática a criptomonedas."
+      },
+      "simpleIntegration": {
+        "title": "Integración simple",
+        "description": "Sin cambios en tu flujo de trabajo. Solo genera un QR y recibe pagos."
+      },
+      "instantPayments": {
+        "title": "Pagos instantáneos",
+        "description": "Recibe pagos en tiempo real con confirmaciones rápidas en la blockchain."
+      }
+    },
+    "promoCards": {
+      "startBeating": {
+        "title1": "Comienza",
+        "title2": "a vencer",
+        "title3": "la inflación",
+        "button": "Comenzar"
+      },
+      "interoperableQR": {
+        "title1": "QR Interoperable:",
+        "title2": "acepta cualquier",
+        "title3": "wallet",
+        "button": "Saber más"
+      },
+      "merchants": {
+        "title1": "+50 Comercios",
+        "title2": "eligen",
+        "title3": "MidatoPay",
+        "button": "Únete"
+      }
+    },
+    "howItWorks": {
+      "title": "Cómo funciona MidatoPay",
+      "titleLine1": "Cómo funciona",
+      "titleLine2": "MidatoPay",
+      "subtitle": "Un proceso simple y seguro para proteger tus ventas de la inflación",
+      "subtitleLine1": "Un proceso simple y seguro para proteger",
+      "subtitleLine2": "tus ventas de la inflación",
+      "description": {
+        "line1": "Un ciclo dinámico",
+        "line2": "iterativo enfocado en",
+        "line3": "simplicidad,",
+        "line4": "personalización",
+        "line5": "y confianza del usuario."
+      },
+      "step1": {
+        "title": "Generar QR",
+        "description": "El comerciante crea un QR con el monto en pesos argentinos y la criptomoneda deseada"
+      },
+      "step2": {
+        "title": "Cliente Escanea",
+        "description": "El cliente escanea el QR con su celular y ve los detalles del pago"
+      },
+      "step3": {
+        "title": "Pago en ARS",
+        "description": "El cliente paga en pesos argentinos usando su método preferido"
+      },
+      "step4": {
+        "title": "Conversión Automática",
+        "description": "MidatoPay convierte automáticamente los pesos a criptomonedas"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para proteger tus ventas?",
+      "description": "Únete a los comerciantes que ya están protegiendo sus ingresos de la inflación.",
+      "button": "Comenzar"
+    },
+    "footer": {
+      "description": "Protege tus ventas de la inflación con pagos en criptomonedas. Conversión automática y seguridad blockchain para tu negocio.",
+      "product": "Producto",
+      "support": "Soporte",
+      "howItWorks": "Cómo funciona",
+      "pricing": "Precios",
+      "security": "Seguridad",
+      "api": "API",
+      "helpCenter": "Centro de Ayuda",
+      "contact": "Contacto",
+      "documentation": "Documentación",
+      "systemStatus": "Estado del Sistema",
+      "copyright": "© 2025 MidatoPay. Todos los derechos reservados.",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "cookies": "Cookies"
+    },
+    "problems": {
+      "title": "Problemas",
+      "subtitle": "Exploramos las expectativas y problemas potenciales de los comerciantes para simplificar su experiencia.",
+      "problem1": {
+        "title": "Pérdida de valor por inflación",
+        "description": "Los comerciantes ven cómo sus ventas en pesos argentinos pierden valor día a día debido a la inflación. No entienden cómo proteger sus ingresos sin cambiar su forma de cobrar."
+      },
+      "problem2": {
+        "title": "Complejidad técnica innecesaria",
+        "description": "Los clientes llegan al comercio y no pueden entender cómo pagar con criptomonedas. Todo parece complicado, necesitan wallets, conocimientos técnicos, y terminan abandonando la compra."
+      }
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "mainTitle": "Tenés una pregunta?",
+      "subtitle": "Todo lo que necesitas saber sobre MidatoPay",
+      "categories": {
+        "general": "General",
+        "pagos": "Pagos"
+      },
+      "items": {
+        "general": [
+          {
+            "question": "Cómo funciona MidatoPay?",
+            "answer": "MidatoPay permite a los comerciantes generar códigos QR que los clientes pueden escanear. Los clientes pagan en pesos argentinos usando su método preferido, y MidatoPay convierte automáticamente esos pesos a criptomonedas, protegiendo el valor de las ventas contra la inflación."
+          },
+          {
+            "question": "Qué criptomonedas acepta MidatoPay?",
+            "answer": "MidatoPay acepta múltiples criptomonedas incluyendo USDT, BTC y ETH. El comerciante puede elegir en qué criptomoneda desea recibir los pagos al generar el código QR."
+          },
+          {
+            "question": "Necesito conocimientos técnicos para usar MidatoPay?",
+            "answer": "No, MidatoPay está diseñado para ser simple y fácil de usar. Solo necesitas generar un código QR y tus clientes pueden pagar normalmente. La conversión a criptomonedas es automática y transparente."
+          }
+        ],
+        "pagos": [
+          {
+            "question": "Cuánto tiempo tarda la conversión?",
+            "answer": "La conversión de pesos argentinos a criptomonedas es instantánea. Una vez que el cliente completa el pago, el comerciante recibe la confirmación en segundos."
+          },
+          {
+            "question": "Es seguro usar MidatoPay?",
+            "answer": "Sí, MidatoPay utiliza tecnología blockchain para garantizar la seguridad de las transacciones. Todas las conversiones se realizan de forma segura y transparente, con confirmaciones en la cadena de bloques."
+          },
+          {
+            "question": "Hay algún costo por usar MidatoPay?",
+            "answer": "MidatoPay ofrece una solución transparente con tarifas competitivas. Los costos se basan en el volumen de transacciones y se comunican claramente antes de cada operación."
+          }
+        ]
+      },
+      "askQuestion": {
+        "button": "Hacer una pregunta",
+        "title": "Haz tu pregunta",
+        "questionLabel": "Tu pregunta",
+        "questionPlaceholder": "Escribe tu pregunta aquí...",
+        "contextLabel": "Contexto (opcional)",
+        "contextPlaceholder": "¿Por qué haces esta pregunta? Comparte el contexto que te ayudará a entender mejor...",
+        "submit": "Enviar pregunta",
+        "cancel": "Cancelar",
+        "success": "¡Gracias! Tu pregunta ha sido enviada. La revisaremos y la agregaremos a las preguntas frecuentes si es relevante.",
+        "error": "Por favor completa al menos la pregunta antes de enviar."
+      }
+    },
+    "support": {
+      "title": "Tecnología Utilizada:",
+      "starknet": {
+        "features": {
+          "cairo": "Cairo smart contracts",
+          "l2": "Red L2 escalable",
+          "costs": "Costos bajos",
+          "security": "Seguridad de Ethereum"
+        }
+      },
+      "cavos": {
+        "features": {
+          "wallets": "Carteras invisibles",
+          "integration": "Integración con Aegis SDK",
+          "auth": "Autenticación perfecta"
+        }
+      }
+    },
+    "ctaSection": {
+      "title": "Únete a nuestra comunidad",
+      "waitlist": {
+        "title": "Lista de Espera",
+        "description": "Sé uno de los primeros en acceder a MidatoPay. Únete a nuestra lista de espera y obtén acceso prioritario cuando lancemos.",
+        "button": "Únete ahora"
+      },
+      "news": {
+        "title": "Noticias",
+        "description": "Mantente al día con nuestros últimos logros, eventos y actualizaciones. Descubre cómo estamos revolucionando los pagos.",
+        "button": "Ver noticias"
+      }
+    },
+    "stats": {
+      "waitlist": "comercios esperando",
+      "billing": "USD en facturación esperando",
+      "transactions": "transacciones exitosas",
+      "merchants": "comercios activos"
+    },
+    "socialMedia": {
+      "title": "Síguenos en nuestras redes sociales"
+    }
+  },
+  "typewriter": {
+    "words": ["inflación", "devaluación", "crisis"]
+  },
+  "waitlist": {
+    "title": "MidatoPay",
+    "subtitle": "La solución de los comerciantes para protegerse de la",
+    "inflation": "Inflación",
+    "description": "La primera wallet de comerciantes que permite cobrar con QR interoperable y recibir pagos directamente en criptomonedas. Protege tu negocio contra la inflación mientras facilitas transacciones modernas y seguras.",
+    "features": {
+      "protection": "Protección contra la inflación",
+      "instant": "Transacciones instantáneas",
+      "crypto": "Pagos en cripto",
+      "qr": "QR Interoperable"
+    },
+    "ctaButton": "Únete a la Lista",
+    "waitlistTitle": "Lista de Espera",
+    "question": "¿Cuál es tu facturación mensual?",
+    "billingOptions": {
+      "lessThan1000": "Menos de USD1,000",
+      "1000to5000": "USD1,000 - USD5,000",
+      "5000to10000": "USD5,000 - USD10,000",
+      "10000to50000": "USD10,000 - USD50,000",
+      "50000to100000": "USD50,000 - USD100,000",
+      "moreThan100000": "Más de USD100,000"
+    },
+    "votes": "votos",
+    "priority": "Obtén acceso prioritario y exclusivo",
+    "modal": {
+      "title": "Lista de Espera",
+      "question": "¿Cuál es tu facturación mensual?",
+      "youSelected": "Seleccionaste:",
+      "emailPlaceholder": "tu@email.com",
+      "subscribe": "Suscribirse",
+      "subscribing": "Suscribiendo...",
+      "priorityText": "Obtén acceso prioritario y exclusivo"
+    },
+    "success": {
+      "title": "¡Te has unido exitosamente!",
+      "message": "Te notificaremos cuando MidatoPay esté disponible.",
+      "close": "Cerrar"
+    },
+    "errors": {
+      "joinError": "Error al unirse a la lista de espera",
+      "connectionError": "Error de conexión. Por favor intenta de nuevo."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "¡Hola!",
+      "backToHome": "Volver al inicio",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "continue": "Continuar",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "rememberMe": "Recordarme",
+      "signIn": "Iniciar sesión",
+      "signingIn": "Iniciando sesión...",
+      "orContinueWith": "O continúa con",
+      "google": "Google",
+      "dontHaveAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate",
+      "change": "Cambiar",
+      "welcome": "¡Bienvenido a MidatoPay!",
+      "errors": {
+        "invalidEmail": "Por favor ingresa un correo electrónico válido",
+        "loggingIn": "Error al iniciar sesión",
+        "passwordMin": "La contraseña debe tener al menos 6 caracteres"
+      },
+      "socialLogin": "Inicio de sesión con {provider} próximamente disponible con Cavos Aegis"
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "backToHome": "Volver al inicio",
+      "fullName": "Nombre completo",
+      "fullNamePlaceholder": "Tu nombre completo",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu@email.com",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Mínimo 6 caracteres",
+      "confirmPassword": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Repite tu contraseña",
+      "orSignUpWith": "o regístrate con",
+      "continueWithGoogle": "Continuar con Google",
+      "continueWithApple": "Continuar con Apple",
+      "change": "Cambiar",
+      "name": "Nombre",
+      "acceptTerms": "Acepto los",
+      "termsAndConditions": "términos y condiciones",
+      "andThe": "y la",
+      "privacyPolicy": "política de privacidad",
+      "createAccount": "Crear Cuenta",
+      "creatingAccount": "Creando cuenta...",
+      "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+      "loginHere": "Inicia sesión aquí",
+      "accountCreated": "¡Cuenta creada exitosamente!",
+      "errors": {
+        "nameMin": "El nombre debe tener al menos 2 caracteres",
+        "invalidEmail": "Por favor ingresa un correo electrónico válido",
+        "passwordMin": "La contraseña debe tener al menos 6 caracteres",
+        "passwordsDontMatch": "Las contraseñas no coinciden",
+        "registering": "Error al registrarse"
+      },
+      "socialRegister": "Registro con {provider} próximamente disponible con Cavos Aegis"
+    }
+  },
+  "news": {
+    "title": "Noticias",
+    "subtitle": "Últimas actualizaciones y novedades de MidatoPay",
+    "readMore": "Leer más",
+    "backToNews": "Volver a Noticias",
+    "articles": {
+      "hackathon": {
+        "title": "MidatoPay gana Hackathon y avanza a Fase Semilla en Startup House de Starknet",
+        "date": "5 de Noviembre - 2025",
+        "excerpt": "Estamos emocionados de anunciar que MidatoPay ha ganado el 3er puesto en un hackathon y ha sido seleccionado para participar en la Fase Semilla del programa Startup House de Starknet en Buenos Aires, Argentina.",
+        "content": "¡Estamos felices de compartir una gran noticia! MidatoPay ganó el 3° puesto en el Hackathon de Starknet entre más de 1.400 proyectos de todo el mundo y ha sido seleccionado para participar en la Fase Semilla del programa Startup House de Starknet en Buenos Aires, Argentina.\n\nEste reconocimiento nos llena de orgullo y nos impulsa a seguir construyendo una solución real de pagos interoperables entre fiat y cripto para los comercios de LATAM.\n\nLa victoria en el hackathon valida nuestra visión de proteger a los comerciantes de la inflación mediante soluciones blockchain.\n\nAgradecemos enormemente a **Cavos**, **Starknet Foundation** y **Crecimiento Argentina** por el apoyo, la confianza y la energía que nos acompañaron en todo el proceso.\n\nDel 12 al 16 de noviembre de 2025, nuestro equipo participará en el Startup House de Buenos Aires, un programa intensivo de 5 días diseñado para llevar proyectos de MVP a startups establecidas. Este programa nos brindará:\n\n• Arquitectura tecnológica mejorada\n• Un plan de go-to-market personalizado para nuestro producto\n• Estrategia de adquisición de primeros clientes\n• Hoja de ruta clara de crecimiento a 90 días con seguimiento\n• Nuevas conexiones con mentores y desarrolladores de Starknet\n\nEl programa incluye alojamiento gratuito, comidas, mentoría y talleres especializados. Estamos comprometidos a aprovechar esta oportunidad única para acelerar el desarrollo de nuestra plataforma y llevar MidatoPay al siguiente nivel.\n\nMantente atento a más actualizaciones mientras continuamos construyendo el futuro de los pagos para comerciantes.",
+        "videoSection": {
+          "title": "Anuncio oficial del hackathon",
+          "description": "Puedes ver el momento exacto en que se anunció que MidatoPay obtuvo el 3er puesto en el hackathon:",
+          "notSupported": "Tu navegador no soporta la reproducción de videos."
+        },
+        "socialMedia": {
+          "title": "Publicaciones en nuestras redes"
+        }
+      },
+      "startupWorldCup": {
+        "title": "MidatoPay seleccionado para competir en Startup World Cup en Buenos Aires",
+        "date": "12 de Noviembre - 2025",
+        "excerpt": "¡Grandes noticias! MidatoPay ha sido seleccionado para competir en las clasificatorias del Startup World Cup en AlephHub en Buenos Aires por Crecimiento Argentina.",
+        "content": "¡Grandes noticias! 🎉\n\nMidatoPay ha sido seleccionado para competir en las clasificatorias del Startup World Cup en AlephHub en Buenos Aires por **Crecimiento Argentina**.\n\nOtro paso hacia nuestro sueño de llevar la inclusión financiera y los pagos fluidos entre cripto y fiat a toda LATAM 🌎\n\nAgradecidos a nuestro equipo."
+      },
+      "startupHouse": {
+        "title": "MidatoPay participará en Startup House de Starknet en Buenos Aires",
+        "date": "12 de Noviembre - 2025",
+        "excerpt": "Nuestro equipo se prepara para participar en el programa Startup House de Starknet en Buenos Aires, un programa intensivo de 5 días diseñado para escalar proyectos de MVP a startups establecidas.",
+        "content": "Estamos emocionados de compartir más detalles sobre el programa Startup House de Starknet en el que participaremos del 12 al 16 de noviembre de 2025 en Buenos Aires, Argentina.\n\nEl Startup House es un programa diseñado para equipos que están construyendo en Starknet y que ya tienen un MVP en funcionamiento. El programa ofrece apoyo práctico de constructores y mentores experimentados durante varios días para crear un negocio exitoso e impulsado por usuarios.\n\nEste programa está diseñado para escalar tu proyecto desde MVP hasta una startup establecida, afinar tus estrategias con mentores expertos y crear oportunidades de networking con inversores y VCs.\n\nBeneficios del programa:\n\n• Arquitectura tecnológica mejorada\n• Un plan de go-to-market personalizado para tu producto\n• Estrategia de adquisición de primeros clientes\n• Hoja de ruta clara de crecimiento a 90 días con seguimiento y soporte\n• Nuevas conexiones con mentores y desarrolladores de Starknet\n\nInformación del evento Buenos Aires:\n\n• Ubicación: Buenos Aires, Argentina\n• Fechas: 12 al 16 de noviembre de 2025\n• Enfoque: Inmersión profunda en refinamiento técnico y escalamiento de negocio para tu MVP de Starknet\n• Incluye: Alojamiento gratuito, comidas, mentoría y talleres\n\nEstamos orgullosos de ser parte de este programa y esperamos compartir nuestros aprendizajes y progreso con nuestra comunidad."
+      }
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "start": "Inicio",
+      "wallet": "Billetera",
+      "movements": "Movimientos",
+      "logout": "Cerrar Sesión"
+    },
+    "header": {
+      "start": "Inicio"
+    },
+    "welcome": "Bienvenido,",
+    "totalBalance": "Balance Total:",
+    "cryptoBalance": "Balance en Criptomonedas:",
+    "filter": "Filtrar",
+    "balance": "Balance",
+    "exchangeRate": "Tasa de Cambio",
+    "argentinePesos": "Pesos Argentinos",
+    "walletInformation": "Información de Wallet",
+    "walletDescription": "Detalles de tu wallet Cavos Aegis conectada",
+    "address": "Dirección",
+    "yourWalletAddress": "Tu dirección de wallet",
+    "network": "Red",
+    "testnet": "Red de Pruebas",
+    "controlCenter": "Centro de Control",
+    "manageBusiness": "Gestiona tu negocio desde aquí",
+    "createPayment": "Crear Pago",
+    "instantQR": "QR Instantáneo",
+    "walletConnected": "Wallet Conectada",
+    "connectWallet": "Conectar Wallet",
+    "disconnecting": "Desconectando...",
+    "connecting": "Conectando...",
+    "clickToConnect": "Click para conectar",
+    "clickToDisconnect": "Click para desconectar",
+    "movements": "Movimientos",
+    "transactionHistory": "Historial de transacciones",
+    "loadingMovements": "Cargando movimientos...",
+    "errorLoading": "Error al cargar",
+    "noMovements": "Sin movimientos aún",
+    "successfulTransfers": "Las transferencias exitosas aparecerán aquí",
+    "loading": "Cargando...",
+    "walletConnectedStatus": "Wallet Conectada",
+    "walletDisconnectedStatus": "Wallet Desconectada",
+    "addressCopied": "Dirección copiada",
+    "generateQR": "Generar QR",
+    "withdraw": "Retirar",
+    "viewHistory": "Ver Historial",
+    "settings": "Configuración",
+    "withdrawComingSoon": "Función próximamente disponible",
+    "settingsComingSoon": "Función próximamente disponible",
+    "createPayment": {
+      "backToDashboard": "Volver al Dashboard",
+      "title": "Crear Pago",
+      "paymentDetails": "Detalles del Pago",
+      "completeDetails": "Completa los detalles para generar el código QR de pago",
+      "amountInARS": "Monto en ARS",
+      "conversionPercentage": "Porcentaje de Conversión",
+      "cryptoToReceive": "Cripto a Recibir",
+      "oracleDescription": "Recibirás USDC automáticamente según la tasa del Oracle",
+      "exchangeRate": "Tipo de Cambio",
+      "exchangeRateLabel": "Tipo de cambio",
+      "loadingRate": "Obteniendo tipo de cambio...",
+      "remainingAmountARS": "Monto Restante en ARS:",
+      "remainingAmountDescription": "Recibirás {percentage}% ({amount} ARS) del monto total",
+      "generateQR": "Generar Código QR de Pago",
+      "generatingQR": "Generando QR...",
+      "qrModal": {
+        "title": "¡QR Generado!",
+        "shareQR": "Comparte este código QR",
+        "youWillReceive": "Recibirás:",
+        "rate": "Tasa:",
+        "calculating": "Calculando...",
+        "copyQR": "Copiar QR",
+        "copied": "¡Copiado!",
+        "download": "Descargar",
+        "refreshQR": "Actualizar QR",
+        "refreshing": "Actualizando...",
+        "generatingNewQR": "Generando nuevo QR...",
+        "close": "Cerrar",
+        "sessionID": "ID de Sesión:",
+        "generated": "Generado:",
+        "paymentQRCode": "Código QR de Pago",
+        "errors": {
+          "errorCopyingQR": "Error al copiar QR",
+          "errorDownloadingQR": "Error al descargar QR"
+        },
+        "success": {
+          "qrCopied": "QR copiado al portapapeles",
+          "qrDownloaded": "QR descargado"
+        }
+      },
+      "errors": {
+        "mustBeAuthenticated": "Debes estar autenticado para crear pagos",
+        "amountMustBeGreater": "El monto debe ser mayor a 0",
+        "errorGeneratingQR": "Error al generar el código QR",
+        "errorUpdatingQR": "Error al actualizar el código QR"
+      },
+      "success": {
+        "qrGenerated": "¡Código QR generado exitosamente!",
+        "qrUpdated": "Código QR actualizado"
+      }
+    },
+    "toasts": {
+      "sessionClosed": "Sesión cerrada",
+      "walletConnected": "Wallet conectada exitosamente",
+      "walletDisconnected": "Wallet desconectada",
+      "noWalletConfigured": "No hay wallet configurada. Usa el componente WalletSetup.",
+      "errorConnecting": "Error conectando wallet",
+      "errorDisconnecting": "Error desconectando wallet"
+    }
+  }
+}
+

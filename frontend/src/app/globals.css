@@ -1,0 +1,324 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fuente personalizada Kufam */
+@font-face {
+  font-family: 'Kufam';
+  src: url('/fonts/kufam.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fuente personalizada Boeing */
+@font-face {
+  font-family: 'Boeing';
+  src: url('/boeing.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fuente personalizada Gromm */
+@font-face {
+  font-family: 'Gromm';
+  src: url('/gromm.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Importar Montserrat desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-color: #f7f7f6 !important;
+  }
+  html {
+    background-color: #f7f7f6 !important;
+  }
+}
+
+/* Estilos personalizados para MidatoPay */
+@layer components {
+  .gradient-bg {
+    background: linear-gradient(135deg, #fe6c1c 0%, #fe9c42 100%);
+  }
+  
+  .crypto-gradient-usdt {
+    background: linear-gradient(135deg, #26a17b 0%, #1e7a5e 100%);
+  }
+  
+  .crypto-gradient-btc {
+    background: linear-gradient(135deg, #f7931a 0%, #e8821e 100%);
+  }
+  
+  .crypto-gradient-eth {
+    background: linear-gradient(135deg, #627eea 0%, #4c63d2 100%);
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(247, 247, 246, 0.1);
+    border: 1px solid rgba(254, 108, 28, 0.2);
+  }
+  
+  .qr-code-container {
+    @apply bg-white p-6 rounded-lg shadow-lg border-2 border-dashed border-gray-300;
+  }
+  
+  .payment-option {
+    @apply p-4 rounded-lg border-2 border-transparent hover:border-orange-500 transition-all duration-200 cursor-pointer;
+  }
+  
+  .payment-option.selected {
+    @apply border-orange-500 bg-orange-50;
+  }
+
+  /* Animación para la barra de información (loop continuo sin salto) */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - 3rem));
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+    will-change: transform;
+  }
+  
+  .status-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .status-pending {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .status-confirmed {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-failed {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-expired {
+    @apply bg-gray-100 text-gray-800;
+  }
+}
+
+/* Animaciones personalizadas */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(254, 108, 28, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(254, 108, 28, 0.8); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .mobile-full {
+    @apply w-full;
+  }
+  
+  .mobile-stack {
+    @apply flex-col space-y-4 space-x-0;
+  }
+}
+
+/* PillNav Custom Styles */
+.custom-pill-nav {
+  font-family: 'Gromm, sans-serif';
+}
+
+.custom-pill-nav .pill {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.custom-pill-nav .pill:hover {
+  transform: translateY(-1px);
+}
+
+.custom-pill-nav .pill-logo {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.custom-pill-nav .pill-logo:hover {
+  transform: scale(1.05);
+}
+
+.custom-pill-nav .pill-nav-items {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.custom-pill-nav .pill-logo {
+  border: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+/* Animación de borde con gradiente para tarjetas de estadísticas */
+@keyframes rotate-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.stats-card-border {
+  position: relative;
+  border-radius: 1rem;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.stats-card-border::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    #FF6A00,
+    #FFFFFF,
+    #FF6A00,
+    #FF8C42,
+    #FFFFFF,
+    #FF6A00,
+    #FFB366,
+    #FFFFFF,
+    #FF6A00
+  );
+  animation: rotate-border 3s linear infinite;
+  z-index: 0;
+}
+
+.stats-card-border::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: calc(1rem - 3px);
+  background: #FFFFFF;
+  z-index: 1;
+}
+
+.stats-card-content {
+  position: relative;
+  z-index: 2;
+  border-radius: calc(1rem - 3px);
+  background: transparent;
+}
+
+/* Animación de gradiente en movimiento para botón CTA */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.cta-button-gradient {
+  background: linear-gradient(
+    135deg,
+    #FF6A00,
+    #FF7A1A,
+    #FF8C42,
+    #FF7A1A,
+    #FF6A00
+  );
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+  border-radius: 2rem;
+}

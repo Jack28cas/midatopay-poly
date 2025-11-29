@@ -1,0 +1,145 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  password     String
+  name         String
+  phone        String?
+  walletAddress String?
+  privateKey   String?  // Clave privada encriptada
+  publicKey    String?  // Clave pública
+  walletCreatedAt DateTime? // Fecha de creación de la wallet
+  clerkId      String?  @unique // ID de Clerk para autenticación
+  role         UserRole @default(MERCHANT)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relaciones
+  payments     Payment[]
+  transactions Transaction[]
+
+  @@map("users")
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  amount      Decimal       @db.Decimal(10, 2)
+  currency    String        @default("ARS")
+  concept     String
+  orderId     String?
+  status      PaymentStatus @default(PENDING)
+  qrCode      String        @unique
+  expiresAt   DateTime
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relaciones
+  userId        String
+  user          User         @relation(fields: [userId], references: [id])
+  transactions  Transaction[]
+
+  @@map("payments")
+}
+
+model Transaction {
+  id                String            @id @default(cuid())
+  paymentId         BigInt            // u256 equivalente usando BigInt (campo escalable)
+  paymentIdString   String            // Referencia a Payment.id para la relación
+  amount            Decimal           @db.Decimal(18, 8)
+  currency          String
+  exchangeRate      Decimal?          @db.Decimal(18, 8)
+  finalAmount       Decimal?          @db.Decimal(10, 2)
+  finalCurrency     String?           @default("ARS")
+  status            TransactionStatus @default(PENDING)
+  blockchainTxHash  String?
+  walletAddress     String?
+  confirmationCount Int               @default(0)
+  requiredConfirmations Int           @default(1)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relaciones
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  payment   Payment @relation(fields: [paymentIdString], references: [id])
+
+  @@map("transactions")
+}
+
+model PriceOracle {
+  id          String   @id @default(cuid())
+  currency    String   // USDT, BTC, ETH
+  baseCurrency String  @default("ARS")
+  price       Decimal  @db.Decimal(18, 8)
+  source      String   // RIPIO, BINANCE, AVERAGE
+  timestamp   DateTime @default(now())
+
+  @@map("price_oracle")
+}
+
+model ExchangeRate {
+  id          String   @id @default(cuid())
+  fromCurrency String
+  toCurrency   String
+  rate        Decimal  @db.Decimal(18, 8)
+  source      String
+  timestamp   DateTime @default(now())
+
+  @@map("exchange_rates")
+}
+
+model Waitlist {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  monthlyBillingUsd Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("waitlist")
+}
+
+enum UserRole {
+  MERCHANT
+  ADMIN
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  EXPIRED
+  CANCELLED
+}
+
+enum TransactionStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  EXPIRED
+}
+model ChipiPayTransaction {
+  id          String   @id @default(cuid())
+  sessionId   String
+  amountARS   Decimal  @db.Decimal(10, 2)
+  amountUSDC  Decimal  @db.Decimal(18, 6)
+  txHash      String   @unique
+  fromAddress String
+  toAddress   String
+  status      String   @default("pending") // pending, completed, failed
+  userId      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("chipipay_transactions")
+}

@@ -1,0 +1,24 @@
+.parallax {
+  position: relative;
+  overflow: hidden;
+  /* Optimizaciones de rendimiento */
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.scroller {
+  display: flex;
+  white-space: nowrap;
+  /* Optimizaciones de rendimiento */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Evitar repaints innecesarios */
+  contain: layout style paint;
+}
+
+.scroller span {
+  flex-shrink: 0;
+  /* Optimización para elementos dentro del scroller */
+  will-change: auto;
+}

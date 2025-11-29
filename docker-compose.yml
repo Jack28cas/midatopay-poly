@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: midatopay-postgres
+    environment:
+      POSTGRES_DB: midatopay
+      POSTGRES_USER: midatopay
+      POSTGRES_PASSWORD: midatopay123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - midatopay-network
+    restart: unless-stopped
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: midatopay-backend
+    environment:
+      DATABASE_URL: postgresql://midatopay:midatopay123@postgres:5432/midatopay
+      JWT_SECRET: midatopay_jwt_secret_development
+      NODE_ENV: development
+      PORT: 3001
+      # Polygon Configuration
+      POLYGON_RPC_URL: ${POLYGON_RPC_URL:-https://polygon-mainnet.infura.io/v3/ee1fad49027d4b21be0e64ed49f0c8b5}
+      POLYGON_ORACLE_ADDRESS: ${POLYGON_ORACLE_ADDRESS:-0x2eF8D1930b1d20504445943A18d6F70e7ce6ABbe}
+      POLYGON_PAYMENT_GATEWAY_ADDRESS: ${POLYGON_PAYMENT_GATEWAY_ADDRESS:-0x52a83a44aa073C0a423f914A6c824DA640ED2F6A}
+      POLYGON_USDC_ADDRESS: ${POLYGON_USDC_ADDRESS:-0xC37c16139a8eFC8f4c2B7CAA5C607514C825FC4C}
+      POLYGON_ADMIN_PRIVATE_KEY: ${POLYGON_ADMIN_PRIVATE_KEY:-}
+      WALLET_ENCRYPTION_KEY: ${WALLET_ENCRYPTION_KEY:-midatopay-wallet-key-2024-secure-32bytes!!}
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - midatopay-network
+    restart: unless-stopped
+    command: npm run dev
+
+  # Frontend Next.js
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: midatopay-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+      NEXT_PUBLIC_WS_URL: ws://localhost:3002
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - midatopay-network
+    restart: unless-stopped
+    command: npm run dev
+
+  # Redis para cache (opcional)
+  redis:
+    image: redis:7-alpine
+    container_name: midatopay-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - midatopay-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  midatopay-network:
+    driver: bridge
