@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { useUser } from '@clerk/nextjs'
+import { useUser, useAuth } from '@clerk/nextjs'
 import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -23,6 +23,7 @@ import { useUserProfile } from '@/hooks/useUserProfile'
 export function OnboardingFlow() {
   const router = useRouter()
   const { user: clerkUser } = useUser()
+  const { getToken } = useAuth()
   const { reloadProfile } = useUserProfile()
   const [step, setStep] = useState<'business-name' | 'creating-wallet' | 'complete'>('business-name')
   const [businessName, setBusinessName] = useState('')
@@ -33,7 +34,7 @@ export function OnboardingFlow() {
   const getClerkToken = async (): Promise<string | null> => {
     if (!clerkUser) return null
     try {
-      return await clerkUser.getToken()
+      return await getToken()
     } catch (error) {
       console.error('Error obteniendo token:', error)
       return null
