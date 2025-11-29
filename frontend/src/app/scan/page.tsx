@@ -35,10 +35,29 @@ export default function QRScannerPage() {
         setIsInitialized(true)
         
         // Verificar si estamos en un contexto seguro (HTTPS o localhost)
-        const isSecureContext = window.isSecureContext || location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+        const isSecureContext = typeof window !== 'undefined' && (
+          window.isSecureContext === true || 
+          location.protocol === 'https:' || 
+          location.hostname === 'localhost' || 
+          location.hostname === '127.0.0.1' ||
+          location.hostname.endsWith('.localhost')
+        )
+        
+        console.log('🔒 Security context check:', {
+          isSecureContext: window.isSecureContext,
+          protocol: location.protocol,
+          hostname: location.hostname,
+          isSecure: isSecureContext
+        })
+        
         if (!isSecureContext) {
-          setError('Camera access requires HTTPS. Please access this page via HTTPS (https://midatopay.com/scan)')
-          console.error('❌ Not a secure context. Camera requires HTTPS.')
+          const errorMsg = `Camera access requires HTTPS. Current protocol: ${location.protocol}. Please access via https://midatopay.com/scan`
+          setError(errorMsg)
+          console.error('❌ Not a secure context. Camera requires HTTPS.', {
+            protocol: location.protocol,
+            hostname: location.hostname,
+            isSecureContext: window.isSecureContext
+          })
           return
         }
         
