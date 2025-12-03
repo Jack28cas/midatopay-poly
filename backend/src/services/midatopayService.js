@@ -2,6 +2,8 @@ const { EMVQRGenerator, EMVQRParser } = require('./emvQRGenerator');
 const prisma = require('../config/database');
 const PolygonService = require('./polygonService');
 const PolygonOracleService = require('./polygonOracleService');
+const OptimismService = require('./optimismService');
+const OptimismOracleService = require('./optimismOracleService');
 const { convertARSToCrypto } = require('./priceOracle');
 
 class MidatoPayService {
@@ -10,11 +12,41 @@ class MidatoPayService {
     this.qrParser = new EMVQRParser();
     this.polygonService = new PolygonService();
     this.polygonOracle = new PolygonOracleService();
-    this.usdcTokenAddress = process.env.POLYGON_USDC_ADDRESS || '0xC37c16139a8eFC8f4c2B7CAA5C607514C825FC4C';
+    this.optimismService = new OptimismService();
+    this.optimismOracle = new OptimismOracleService();
+    this.polygonUsdcAddress = process.env.POLYGON_USDC_ADDRESS || '0xC37c16139a8eFC8f4c2B7CAA5C607514C825FC4C';
+    this.optimismUsdcAddress = process.env.OPTIMISM_USDC_ADDRESS || '0x3d127a80655e4650D97e4499217dC8c083A39242';
+  }
+
+  // Obtener servicio según la red
+  getService(network) {
+    const normalizedNetwork = (network || 'polygon').toLowerCase();
+    if (normalizedNetwork === 'optimism') {
+      return this.optimismService;
+    }
+    return this.polygonService;
+  }
+
+  // Obtener oracle según la red
+  getOracle(network) {
+    const normalizedNetwork = (network || 'polygon').toLowerCase();
+    if (normalizedNetwork === 'optimism') {
+      return this.optimismOracle;
+    }
+    return this.polygonOracle;
+  }
+
+  // Obtener dirección USDC según la red
+  getUsdcAddress(network) {
+    const normalizedNetwork = (network || 'polygon').toLowerCase();
+    if (normalizedNetwork === 'optimism') {
+      return this.optimismUsdcAddress;
+    }
+    return this.polygonUsdcAddress;
   }
 
   // Generar QR de pago para comercio
-  async generatePaymentQR(merchantId, amountARS, concept = 'Pago QR') {
+  async generatePaymentQR(merchantId, amountARS, concept = 'Pago QR', network = 'polygon') {
     try {
       // 1. Obtener datos del comercio
       const merchant = await this.getMerchant(merchantId);
@@ -60,17 +92,19 @@ class MidatoPayService {
       // 5. Generar QR visual
       const qrCodeImage = await this.qrGenerator.generateQRCodeImage(tlvData);
       
-      // 6. QR generado exitosamente - starkli se ejecutará al escanear
-      console.log('✅ QR generado exitosamente - listo para escanear');
+      // 6. QR generado exitosamente - listo para escanear
+      console.log(`✅ QR generado exitosamente para red ${network} - listo para escanear`);
 
-      // 7. Obtener cotización para mostrar en el QR usando Oracle de Polygon
+      // 7. Obtener cotización para mostrar en el QR usando Oracle según la red
+      const oracle = this.getOracle(network);
+      const usdcAddress = this.getUsdcAddress(network);
       let cryptoAmount = 0;
       let exchangeRate = 0;
       try {
-        const quoteResult = await this.polygonOracle.getARSToUSDTQuote(amountARS, this.usdcTokenAddress);
+        const quoteResult = await oracle.getARSToUSDTQuote(amountARS, usdcAddress);
         cryptoAmount = quoteResult.usdtAmount;
         exchangeRate = quoteResult.rate;
-        console.log('✅ Cotización obtenida del Oracle de Polygon:', { cryptoAmount, exchangeRate });
+        console.log(`✅ Cotización obtenida del Oracle de ${network}:`, { cryptoAmount, exchangeRate });
       } catch (error) {
         console.warn('⚠️ Error obteniendo cotización del Oracle, usando valores por defecto:', error.message);
         cryptoAmount = amountARS * 0.001; // Rate aproximado
@@ -83,10 +117,12 @@ class MidatoPayService {
       console.log('💾 PaymentId length:', paymentId.length);
       console.log('💾 MerchantId:', merchantId);
       console.log('💾 Amount:', amountARS);
+      console.log('💾 Network:', network);
       await this.savePaymentSession(paymentId, merchantId, {
         amountARS,
         concept,
-        merchantWallet: merchant.walletAddress
+        merchantWallet: merchant.walletAddress,
+        network
       });
       console.log('✅ Pago guardado exitosamente con orderId:', paymentId);
       
@@ -103,7 +139,8 @@ class MidatoPayService {
           targetCrypto: 'USDC',
           cryptoAmount,
           exchangeRate,
-          sessionId: paymentId
+          sessionId: paymentId,
+          network
         }
       };
       
@@ -169,6 +206,7 @@ class MidatoPayService {
         orderId: paymentId,
         status: 'PENDING',
         qrCode: uniqueQRCode,
+        network: paymentData.network || 'polygon',
         expiresAt: expirationTime
       });
 
@@ -180,6 +218,7 @@ class MidatoPayService {
           orderId: paymentId, // Usar paymentId como orderId
           status: 'PENDING', // Campo obligatorio del schema
           qrCode: uniqueQRCode, // QR único para evitar conflictos
+          network: paymentData.network || 'polygon', // Red seleccionada
           expiresAt: expirationTime, // Campo obligatorio del schema
           userId: merchantId // Campo obligatorio del schema para la relación
         }
@@ -349,31 +388,34 @@ class MidatoPayService {
         throw new Error('El pago ya fue procesado');
       }
 
-      // 🚀 EJECUTAR PAGO EN POLYGON - Cuando se escanea el QR
-      console.log('🚀 QR escaneado - Ejecutando transacción en Polygon...');
-      let polygonResult = null;
+      // 🚀 EJECUTAR PAGO EN LA RED CORRESPONDIENTE - Cuando se escanea el QR
+      const paymentNetwork = payment.network || 'polygon';
+      console.log(`🚀 QR escaneado - Ejecutando transacción en ${paymentNetwork}...`);
+      const service = this.getService(paymentNetwork);
+      const usdcAddress = this.getUsdcAddress(paymentNetwork);
+      let blockchainResult = null;
       try {
         // Extraer el número del paymentId (formato: "payment_1" -> 1)
         const paymentIdMatch = paymentId.match(/payment_(\d+)/);
         const paymentIdNumber = paymentIdMatch ? parseInt(paymentIdMatch[1], 10) : 1;
         
-        polygonResult = await this.polygonService.executePayment(
+        blockchainResult = await service.executePayment(
           merchantAddress,
           amount,
-          this.usdcTokenAddress,
+          usdcAddress,
           paymentIdNumber
         );
-        console.log('✅ Transacción Polygon ejecutada:', polygonResult);
+        console.log(`✅ Transacción ${paymentNetwork} ejecutada:`, blockchainResult);
       } catch (error) {
-        console.warn('⚠️ Error ejecutando transacción Polygon:', error.message);
-        polygonResult = {
+        console.warn(`⚠️ Error ejecutando transacción ${paymentNetwork}:`, error.message);
+        blockchainResult = {
           success: false,
           error: error.message
         };
       }
 
       // 📝 ACTUALIZAR ESTADO DEL PAGO si la transacción fue exitosa
-      if (polygonResult && polygonResult.success) {
+      if (blockchainResult && blockchainResult.success) {
         try {
           await prisma.payment.update({
             where: { id: payment.id },
@@ -390,20 +432,21 @@ class MidatoPayService {
       
       // Preparar datos de la transacción blockchain
       let blockchainTransaction = null;
-      if (polygonResult && polygonResult.success && polygonResult.transactionHash) {
+      if (blockchainResult && blockchainResult.success && blockchainResult.transactionHash) {
         blockchainTransaction = {
-          hash: polygonResult.transactionHash,
-          explorerUrl: polygonResult.explorerUrl || `https://polygonscan.com/tx/${polygonResult.transactionHash}`,
-          blockNumber: polygonResult.blockNumber,
-          gasUsed: polygonResult.gasUsed,
-          success: polygonResult.success
+          hash: blockchainResult.transactionHash,
+          explorerUrl: blockchainResult.explorerUrl,
+          blockNumber: blockchainResult.blockNumber,
+          gasUsed: blockchainResult.gasUsed,
+          success: blockchainResult.success,
+          network: paymentNetwork
         };
         console.log('✅ Blockchain transaction data:', blockchainTransaction);
       } else {
         console.warn('⚠️ No blockchain transaction data available:', {
-          hasPolygonResult: !!polygonResult,
-          success: polygonResult?.success,
-          hasTransactionHash: !!polygonResult?.transactionHash
+          hasBlockchainResult: !!blockchainResult,
+          success: blockchainResult?.success,
+          hasTransactionHash: !!blockchainResult?.transactionHash
         });
       }
       
@@ -416,8 +459,9 @@ class MidatoPayService {
           merchantName: payment.user.name,
           concept: payment.concept,
           expiresAt: payment.expiresAt.toISOString(),
-          status: (polygonResult && polygonResult.success) ? 'PAID' : payment.status,
-          blockchainTransaction
+          status: (blockchainResult && blockchainResult.success) ? 'PAID' : payment.status,
+          blockchainTransaction,
+          network: paymentNetwork
         }
       };
       

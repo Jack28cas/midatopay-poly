@@ -6,6 +6,7 @@ const priceOracle = require('../services/priceOracle');
 router.get('/quote/:amount', async (req, res) => {
   try {
     const amountARS = parseFloat(req.params.amount);
+    const network = (req.query.network || 'polygon').toLowerCase();
     
     if (isNaN(amountARS) || amountARS <= 0) {
       return res.status(400).json({
@@ -14,15 +15,24 @@ router.get('/quote/:amount', async (req, res) => {
       });
     }
 
-    console.log(`🔍 Obteniendo cotización para ${amountARS} ARS...`);
+    const supportedNetworks = ['polygon', 'optimism'];
+    if (!supportedNetworks.includes(network)) {
+      return res.status(400).json({
+        success: false,
+        error: `Network must be one of: ${supportedNetworks.join(', ')}`
+      });
+    }
+
+    console.log(`🔍 Obteniendo cotización para ${amountARS} ARS en red ${network}...`);
     
-    const conversion = await priceOracle.convertARSToCrypto(amountARS, 'USDC');
+    const conversion = await priceOracle.convertARSToCrypto(amountARS, 'USDC', network);
     
     res.json({
       success: true,
       data: {
         amountARS,
         targetCrypto: 'USDC',
+        network,
         cryptoAmount: conversion.cryptoAmount,
         exchangeRate: conversion.exchangeRate,
         source: conversion.source,

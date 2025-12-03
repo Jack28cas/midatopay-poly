@@ -1,13 +1,15 @@
 const prisma = require('../config/database');
 const cron = require('node-cron');
 const PolygonOracleService = require('./polygonOracleService');
+const OptimismOracleService = require('./optimismOracleService');
 
 // Cache de precios en memoria (para MVP)
 const priceCache = new Map();
 const CACHE_DURATION = 30 * 1000; // 30 segundos
 
-// Instancia del servicio Oracle de Polygon
+// Instancias de los servicios Oracle
 const polygonOracle = new PolygonOracleService();
+const optimismOracle = new OptimismOracleService();
 
 async function getCurrentPrice(currency, baseCurrency = 'ARS') {
   const cacheKey = `${currency}_${baseCurrency}`;
@@ -118,32 +120,46 @@ async function getPriceHistory(currency, baseCurrency = 'ARS', hours = 24) {
   return prices;
 }
 
-// Función específica para conversión ARS → Crypto (MidatoPay) - ORACLE DE POLYGON
-async function convertARSToCrypto(amountARS, targetCrypto) {
+// Función específica para conversión ARS → Crypto (MidatoPay) - ORACLE SEGÚN RED
+async function convertARSToCrypto(amountARS, targetCrypto, network = 'polygon') {
   try {
-    // 🚀 ORACLE DE POLYGON para USDC
+    const normalizedNetwork = network.toLowerCase();
+    
+    // 🚀 ORACLE según la red seleccionada para USDC
     if (targetCrypto === 'USDC') {
-      console.log(`🔍 Convirtiendo ${amountARS} ARS a USDC usando Oracle de Polygon...`);
+      let oracle;
+      let oracleAddress;
       
-      const quoteResult = await polygonOracle.getARSToUSDTQuote(amountARS);
+      if (normalizedNetwork === 'optimism') {
+        console.log(`🔍 Convirtiendo ${amountARS} ARS a USDC usando Oracle de Optimism...`);
+        oracle = optimismOracle;
+        oracleAddress = optimismOracle.oracleAddress;
+      } else {
+        console.log(`🔍 Convirtiendo ${amountARS} ARS a USDC usando Oracle de Polygon...`);
+        oracle = polygonOracle;
+        oracleAddress = polygonOracle.oracleAddress;
+      }
+      
+      const quoteResult = await oracle.getARSToUSDTQuote(amountARS);
       
       return {
         amountARS,
         targetCrypto,
+        network: normalizedNetwork,
         cryptoAmount: quoteResult.usdtAmount,
         exchangeRate: quoteResult.rate,
-        source: 'POLYGON_ORACLE',
+        source: normalizedNetwork === 'optimism' ? 'OPTIMISM_ORACLE' : 'POLYGON_ORACLE',
         timestamp: quoteResult.timestamp,
-        oracleAddress: polygonOracle.oracleAddress,
+        oracleAddress: oracleAddress,
         // Agregar margen de seguridad del 2%
         cryptoAmountWithMargin: quoteResult.usdtAmount * 0.98
       };
     }
     
     // Para otras criptomonedas, no soportadas
-    throw new Error(`Solo se soporta conversión a USDC a través del Oracle de Polygon. Solicitado: ${targetCrypto}`);
+    throw new Error(`Solo se soporta conversión a USDC. Solicitado: ${targetCrypto}`);
   } catch (error) {
-    console.error(`Error convirtiendo ${amountARS} ARS a ${targetCrypto}:`, error.message);
+    console.error(`Error convirtiendo ${amountARS} ARS a ${targetCrypto} en red ${network}:`, error.message);
     throw error;
   }
 }

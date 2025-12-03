@@ -41,6 +41,7 @@ model Payment {
   orderId     String?
   status      PaymentStatus @default(PENDING)
   qrCode      String        @unique
+  network     String?       // 'polygon' o 'optimism'
   expiresAt   DateTime
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt

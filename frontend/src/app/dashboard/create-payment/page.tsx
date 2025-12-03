@@ -21,7 +21,6 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { midatoPayAPI } from '@/lib/midatopay-api'
 import { QRModal } from '@/components/QRModal'
 import { useOracleConversion } from '@/hooks/useOracleConversion'
-// Removed ChipiPay and Starknet imports
 
 export default function CreatePaymentPage() {
   const { user, isAuthenticated } = useAuth()
@@ -61,6 +60,7 @@ export default function CreatePaymentPage() {
   const [cryptoAmount, setCryptoAmount] = useState<number | null>(null)
   const [exchangeRate, setExchangeRate] = useState<number | null>(null)
   const [percentage, setPercentage] = useState<number>(100) // Porcentaje predeterminado 100%
+  const [selectedNetwork, setSelectedNetwork] = useState<'polygon' | 'optimism'>('polygon')
 
   // Calcular montos según el porcentaje seleccionado
   const adjustedCryptoAmount = cryptoAmount !== null && watchedAmount 
@@ -80,8 +80,8 @@ export default function CreatePaymentPage() {
 
     const timeoutId = setTimeout(async () => {
       try {
-        // Usar sistema actual para conversión ARS → USDC usando Oracle de Polygon
-        const result = await convertARSToCrypto(watchedAmount, 'USDC')
+        // Usar sistema actual para conversión ARS → USDC usando Oracle según la red seleccionada
+        const result = await convertARSToCrypto(watchedAmount, 'USDC', selectedNetwork)
         if (result) {
           setCryptoAmount(result.cryptoAmount)
           setExchangeRate(result.exchangeRate)
@@ -97,7 +97,7 @@ export default function CreatePaymentPage() {
     }, 1000) // Debounce de 1 segundo
 
     return () => clearTimeout(timeoutId)
-  }, [watchedAmount, convertARSToCrypto])
+  }, [watchedAmount, convertARSToCrypto, selectedNetwork])
 
 
   const onSubmit = async (data: CreatePaymentForm) => {
@@ -111,7 +111,8 @@ export default function CreatePaymentPage() {
       // Usar sistema actual para generar QR
       const result = await midatoPayAPI.generatePaymentQR({
         amountARS: data.amount,
-        targetCrypto: 'USDC'
+        targetCrypto: 'USDC',
+        network: selectedNetwork
       })
 
       if (result.success) {
@@ -191,7 +192,52 @@ export default function CreatePaymentPage() {
               <CardContent className="space-y-6">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   
-                  {/* ChipiPay UI removida */}
+                  {/* Selector de Red */}
+                  <div className="space-y-2">
+                    <Label style={{ color: '#1a1a1a', fontWeight: '500' }}>Red Blockchain</Label>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedNetwork('polygon')}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+                          selectedNetwork === 'polygon'
+                            ? 'scale-105 shadow-md'
+                            : 'hover:scale-105'
+                        }`}
+                        style={{
+                          backgroundColor: selectedNetwork === 'polygon' ? '#8247E5' : 'rgba(247, 247, 246, 0.8)',
+                          color: selectedNetwork === 'polygon' ? '#ffffff' : '#1a1a1a',
+                          border: selectedNetwork === 'polygon' ? '2px solid #8247E5' : '1px solid rgba(130, 71, 229, 0.2)',
+                          fontFamily: 'Kufam, sans-serif',
+                          fontWeight: selectedNetwork === 'polygon' ? 600 : 500
+                        }}
+                      >
+                        <div className="flex items-center justify-center space-x-2">
+                          <span>Polygon</span>
+                        </div>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedNetwork('optimism')}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+                          selectedNetwork === 'optimism'
+                            ? 'scale-105 shadow-md'
+                            : 'hover:scale-105'
+                        }`}
+                        style={{
+                          backgroundColor: selectedNetwork === 'optimism' ? '#FF0420' : 'rgba(247, 247, 246, 0.8)',
+                          color: selectedNetwork === 'optimism' ? '#ffffff' : '#1a1a1a',
+                          border: selectedNetwork === 'optimism' ? '2px solid #FF0420' : '1px solid rgba(255, 4, 32, 0.2)',
+                          fontFamily: 'Kufam, sans-serif',
+                          fontWeight: selectedNetwork === 'optimism' ? 600 : 500
+                        }}
+                      >
+                        <div className="flex items-center justify-center space-x-2">
+                          <span>Optimism</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
                   
                   {/* Monto */}
                   <div className="space-y-2">
@@ -367,7 +413,8 @@ export default function CreatePaymentPage() {
           try {
             const result = await midatoPayAPI.generatePaymentQR({
               amountARS: qrData.paymentData.amountARS,
-              targetCrypto: 'USDC'
+              targetCrypto: 'USDC',
+              network: selectedNetwork
             })
             
             if (result.success) {

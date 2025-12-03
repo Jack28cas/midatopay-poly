@@ -8,7 +8,7 @@ const midatoPayService = new MidatoPayService();
 // Generar QR de pago
 router.post('/generate-qr', authenticateToken, async (req, res) => {
   try {
-    const { amountARS, targetCrypto, concept } = req.body;
+    const { amountARS, targetCrypto, concept, network } = req.body;
     const merchantId = req.user.id; // Asumiendo que auth middleware agrega user info
 
     if (!amountARS || !targetCrypto) {
@@ -33,7 +33,17 @@ router.post('/generate-qr', authenticateToken, async (req, res) => {
       });
     }
 
-    const result = await midatoPayService.generatePaymentQR(merchantId, amountARS, targetCrypto, concept);
+    // Validar red (polygon por defecto)
+    const supportedNetworks = ['polygon', 'optimism'];
+    const selectedNetwork = (network || 'polygon').toLowerCase();
+    if (!supportedNetworks.includes(selectedNetwork)) {
+      return res.status(400).json({
+        success: false,
+        error: `network must be one of: ${supportedNetworks.join(', ')}`
+      });
+    }
+
+    const result = await midatoPayService.generatePaymentQR(merchantId, amountARS, concept, selectedNetwork);
     
     res.json(result);
   } catch (error) {

@@ -46,6 +46,8 @@ class MidatoPayAPI {
   async generatePaymentQR(data: {
     amountARS: number;
     targetCrypto: string;
+    network?: string;
+    concept?: string;
   }) {
     return this.request('/api/midatopay/generate-qr', {
       method: 'POST',

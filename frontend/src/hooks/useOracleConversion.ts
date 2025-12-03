@@ -51,14 +51,50 @@ export function useOracleConversion() {
     }
   };
 
-  // Conversión ARS → USDC usando Oracle de Polygon
-  const convertARSToCrypto = async (amountARS: number, targetCrypto: string): Promise<OracleConversionResult | null> => {
+  // Conversión ARS → USDC usando Oracle según la red
+  const convertARSToCrypto = async (amountARS: number, targetCrypto: string, network: string = 'polygon'): Promise<OracleConversionResult | null> => {
     if (targetCrypto !== 'USDC') {
-      setError('Solo USDC está soportado por el Oracle de Polygon');
+      setError('Solo USDC está soportado');
       return null;
     }
 
-    return await quoteARSToUSDC(amountARS);
+    // Usar el endpoint del oracle con parámetro de red
+    if (!amountARS || amountARS <= 0) {
+      return null;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Llamar al endpoint del backend que usa el Oracle según la red
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/oracle/quote/${amountARS}?network=${network}`);
+      
+      if (!response.ok) {
+        throw new Error('Error al consultar el Oracle');
+      }
+
+      const data = await response.json();
+      
+      if (!data.success || !data.data) {
+        throw new Error(data.error || 'Oracle no disponible');
+      }
+
+      const { cryptoAmount, exchangeRate, source } = data.data;
+      
+      return {
+        cryptoAmount: Number(cryptoAmount),
+        exchangeRate: Number(exchangeRate),
+        source: source || `${network.toUpperCase()}_ORACLE`
+      };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : `Error consultando Oracle de ${network}`;
+      setError(errorMessage);
+      console.error('Error calling Oracle:', err);
+      return null;
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {
